@@ -423,7 +423,6 @@ main {
     width: 300px;
     text-align: center;
 }
-<<<<<<< HEAD
 @media (max-width:480px){
     .search{
         justify-content: center;
@@ -443,5 +442,3 @@ main {
         height: 50px;
     }
 }
-=======
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
