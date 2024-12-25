@@ -12,13 +12,8 @@
   grid-area: sidebar;
   height: calc(100vh - 60px);
   width: 200px;
-<<<<<<< HEAD
   background-color: var(--clr-primary);
   overflow-y: hidden;
-=======
-  background-color: #4a5d4c;
-  overflow-y: auto;
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
   transition: width 300ms ease-in-out;
   font-family: Bitter;
   font-weight: bold;
@@ -46,7 +41,6 @@
 }
 #sidebar ul li.active a{
   color: var(--clr-primary);
-<<<<<<< HEAD
   background-color: var(--base-clr);
   svg{
     fill: var(--clr-primary);
@@ -54,9 +48,6 @@
 }
 #sidebar ul li.active a:hover{
   fill: var(--clr-primary);
-=======
-
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
   svg{
     fill: var(--clr-primary);
   }
@@ -66,11 +57,7 @@
   border-radius: .5em;
   padding: .85em;
   text-decoration: none;
-<<<<<<< HEAD
   color: var(--base-clr);
-=======
-  color: var(--clr-primary);
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
   display: flex;
   align-items: center;
   gap: 1em;
@@ -83,25 +70,17 @@
 
 #sidebar svg{
   flex-shrink: 0;
-<<<<<<< HEAD
   fill: var(--base-clr);
-=======
-  fill: var(--clr-primary);
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
 }
 #sidebar a span{
   flex-grow: 1;
 }
 #sidebar a:hover{
-<<<<<<< HEAD
   background-color: var(--hover-clr);
   color: var(--clr-primary);
   svg{
     fill: var(--clr-primary);
   }
-=======
-  background-color: hsl(139, 20%, 42%);
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
 }
 #sidebar span:hover{
     color: hsl(39, 85%, 55%);
@@ -139,11 +118,7 @@
     min-height: auto;
     border-right: none;
     overflow-y: hidden;
-<<<<<<< HEAD
     background-color: var(--clr-primary);
-=======
-    background-color: #3b5b44;
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
     border-radius: 10px 10px 0px 0px;
   }
 
