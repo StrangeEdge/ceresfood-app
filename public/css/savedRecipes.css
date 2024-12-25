@@ -221,7 +221,6 @@ main p {
     width: 80px;
     object-fit: cover;
   }
-<<<<<<< HEAD
   .recipe-filler p{
     font-size: 0.8rem;
   }
@@ -234,6 +233,4 @@ main p {
   .toast-actions button{
     margin-bottom: 5px;
   }
-=======
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
 }

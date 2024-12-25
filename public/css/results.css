@@ -340,7 +340,6 @@ main {
     .recipe-container {
         grid-template-columns: 1fr;
     }
-<<<<<<< HEAD
     .search{
         justify-content: center;
         h1{
@@ -358,6 +357,4 @@ main {
         font-size: 0.8rem;
         height: 50px;
     }
-=======
->>>>>>> e3bc9411bc844de076456e99e79612b8fb7efc5d
 }
