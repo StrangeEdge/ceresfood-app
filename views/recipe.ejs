@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= recipeDetails.label %> Recipe</title>
+    <link rel="icon" type="x-icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/recipePage.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');</style>
+</head>
+<body>
+    <a href="/ceres" class="home-button">Back Home</a>
+    <h1><%= recipeDetails.label %></h1>
+    
+    <img src="<%= recipeDetails.image %>" alt="<%= recipeDetails.label %>" />
+    
+    <div class="recipe-info">
+        <div>
+            <p><strong>Cuisine:</strong> <%= recipeDetails.cuisineType ? recipeDetails.cuisineType.join(', ') : 'Not specified' %></p>
+            <p><strong>Meal Type:</strong> <%= recipeDetails.mealType ? recipeDetails.mealType.join(', ') : 'Not specified' %></p>
+            <p><strong>Cooking Time:</strong> <%= recipeDetails.totalTime > 0 ? recipeDetails.totalTime + ' minutes' : 'Not specified' %></p>
+        </div>
+        
+        <div class="nutrition">
+            <h3>Nutrition (per serving)</h3>
+            <p><strong>Calories:</strong> <%= Math.round(recipeDetails.calories / recipeDetails.yield) %></p>
+            <p><strong>Protein:</strong> <%= Math.round(recipeDetails.totalNutrients.PROCNT.quantity / recipeDetails.yield) %> g</p>
+            <p><strong>Fat:</strong> <%= Math.round(recipeDetails.totalNutrients.FAT.quantity / recipeDetails.yield) %> g</p>
+            <p><strong>Carbs:</strong> <%= Math.round(recipeDetails.totalNutrients.CHOCDF.quantity / recipeDetails.yield) %> g</p>
+        </div>
+    </div>
+
+    <h2>Ingredients</h2>
+    <ul>
+        <% recipeDetails.ingredients.forEach(ingredient => { %>
+            <li><%= ingredient.text %></li>
+        <% }) %>
+    </ul>
+
+    <h2>Health Labels</h2>
+    <div>
+        <% recipeDetails.healthLabels.forEach(label => { %>
+            <span class="labels"><%= label %></span>
+        <% }) %>
+    </div>
+
+    
+    <div class="diet-info">
+        <h2>Dietary Information</h2>
+        <div class="diet-container">
+            <% if (recipeDetails.dietLabels && recipeDetails.dietLabels.length > 0) { %>
+                <h3>Diet Labels</h3>
+                <% recipeDetails.dietLabels.forEach(label => { %>
+                    <span class="labels"><%= label %></span>
+                <% }) %>
+            <% } %>
+        </div>
+        
+        <div class="diet-container">
+            <% if (recipeDetails.cautions && recipeDetails.cautions.length > 0) { %>
+                <h3>Cautions</h3>
+                <% recipeDetails.cautions.forEach(caution => { %>
+                    <span class="labels-caution"><%= caution %></span>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+
+    <h2>Cooking Instructions</h2>
+    <% if (recipeDetails.url) { %>
+        <p>For detailed cooking instructions, please visit the original recipe source and follow along there: <a href="<%= recipeDetails.url %>" target="_blank">Recipe Source</a></p>
+    <% } else { %>
+        <p>No cooking instructions available from this source.</p>
+    <% } %>
+
+</body>
+</html>

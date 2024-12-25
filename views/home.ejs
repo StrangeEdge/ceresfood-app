@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="icon" type="x-icon" href="images/favicon.png">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');</style>
+    <script src="https://kit.fontawesome.com/3eaddf1d51.js" crossorigin="anonymous"></script>
+    <title>Ceres</title>
+</head>
+<body class="home-page" action="/home" method="post">
+    <header class="header">
+        <div class="logo-container">
+            <img href="#" class="logo" src="images/Ceres Logo.png"></img>
+            <a class="logo-text">CERES</a>
+        </div>
+        <div class="navbar-container">
+            <nav class="navbar">
+                <a>Home</a>
+                <a href="/ceres">Recipes</a>
+                <div class="user-dropdown">
+                    <a class="dropdown">About Us</a>
+                    <div class="dropdown-menu">
+                        <a href="/info">Who We Are</a>
+                        <a href="/info">FAQ</a>
+                        <a href="/info">Contact Us</a>
+                        <a href="/termsAndConditions">Terms and Conditions</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="navbar">
+                <% if (locals.username) { %>
+                    <div class="userIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+                        </svg>
+                    </div>
+                    <div class="user-dropdown">
+                        <a class="username"><%= username %></a>
+                        <div class="dropdown-menu">
+                            <a href="/logout" class="logout-link">Logout</a>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                <% } %>
+            </div>
+        </div>
+    </header>
+
+    <div class="container1">
+        <div class="text-container">
+            <h1 class="front-text">Your new kitchen companion.</h1>
+            <p class="front-text-para">We want to help make cooking more enjoyable by becoming your go-to app for all your culinary needs.</p>
+            <div class="get-started-button">
+                <a class="button" href="/signup">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <div class="container2">
+        <div class="text-container2">
+            <h1>Why use Ceres?</h1>
+            <p>Because we want to make cooking easy and tailor it exactly to your preferences.</p>
+        </div>
+        <div class="container2-image">
+            <img src="images/Library-Mobile.png">
+        </div>
+    </div>
+    <div class="container3">
+        <div class="text-container3">
+            <h1>Use Ceres on the go.</h1>
+            <p>Whether it be our app on your phone or our website on your computer, we want to be there for your cooking needs anywhere.</p>
+        </div>
+        <div class="container3-image">
+            <img src="images/Home-Web.png">
+        </div>
+    </div>
+    <div class="container4">
+        <div class="text-container4">
+            <h1>Your favorite recipes anywhere</h1>
+            <p>Ceres provides you with a variety of recipes that you can try and cook along to with detailed instructions and even a video recipe to follow.</p>
+        </div>
+        <div class="container4-image">
+            <img src="images/recipething.png">
+        </div>
+    </div>
+    <div class="container5">
+        <div class="text-container5">
+            <h1><i class="fa-solid fa-utensils"></i> Recipes Anywhere</h1>
+            <p>Whether you're in the kitchen or on the go, we provide easy to follow recipes from all over and try to provide you with culinary variety to spice up your life.</p>
+        </div>
+        <div class="text-container5">
+            <h1><i class="fa-regular fa-calendar"></i> Meal Planner</h1>
+            <p>Ceres can help to prepare personalized meal plans for the week so that meals are more simplified and more balanced.</p>
+        </div>
+        <div class="text-container5">
+            <h1><i class="fa-solid fa-basket-shopping"></i> Ingredient Tracking</h1>
+            <p>We help keep track of your available ingredients to make sure that you're always prepared for your next meal.</p>
+        </div>
+    </div>
+    <div class="container6">
+        <div class="text-container6">
+            <h1>What are you waiting for?</h1>
+            <h1>Let's get cooking.</h1>
+        </div>
+        <div class="container6-image">
+            <a href="https://www.apple.com/app-store/" class="storeButtons" id="apple"><img src="images/appleBadge.png"></a>
+            <a href="https://play.google.com/store/games?hl=en_US" class="storeButtons" id="google"><img src="images/googlePlayBadge.png"></a>
+            
+        </div>
+    </div>
+
+    <div class="footer">
+        <img href="#" class="footer-logo" src="images/Ceres Logo.png"></img>
+        <div class="footer-container">
+            <div class="footer-box2">
+                <h1>Resources</h1>
+                <a href="/info"><h2>FAQ</h2></a href="/info">
+                <a href="mailto:ceres-food@gmail.com"><h2>Contact Us</h2></a href="/info">
+            </div>
+            <div class="footer-box3">
+                <h1>About</h1>
+                <a href="/termsAndConditions"><h2>Terms & Conditions</h2></a>
+                <div class="social-buttons">
+                    <a class="social-btn" aria-label="Facebook"
+                    href="https://www.facebook.com/">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a class="social-btn" aria-label="Bluesky"
+                    href="https://bsky.app/">
+                        <i class="fa-brands fa-bluesky"></i>
+                    </a>
+                    <a class="social-btn" aria-label="Instagram"
+                    href="https://www.instagram.com/">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+:root {
+  --clr-primary: #d6a240;
+  --base-clr: #fff8ea;
+  --accent-clr: #4a5d4c;
+  --text-clr: #333333;
+  --secondary-text-clr: #776e65;
+  --line-clr: #e8dcc9;
+  --hover-clr: #f8f3e6;
+}
+
+#sidebar {
+  grid-area: sidebar;
+  height: calc(100vh - 60px);
+  width: 200px;
+  background-color: #4a5d4c;
+  overflow-y: auto;
+  transition: width 300ms ease-in-out;
+  font-family: Bitter;
+  font-weight: bold;
+  height: 100%;
+  overflow-x: hidden;
+  top: 60px;
+  left: 0;
+  z-index: 100;
+}
+
+#sidebar.close{
+  padding: 5px;
+  width: 60px;
+}
+#sidebar ul{
+  list-style: none;
+}
+#sidebar > ul > li:first-child{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+  .logo{
+    font-weight: 600;
+  }
+}
+#sidebar ul li.active a{
+  color: var(--clr-primary);
+
+  svg{
+    fill: var(--clr-primary);
+  }
+}
+
+#sidebar a, #sidebar .logo{
+  border-radius: .5em;
+  padding: .85em;
+  text-decoration: none;
+  color: var(--clr-primary);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#sidebar .logo{
+    font-family: Trends;
+    font-size: 30px;
+}
+
+#sidebar svg{
+  flex-shrink: 0;
+  fill: var(--clr-primary);
+}
+#sidebar a span{
+  flex-grow: 1;
+}
+#sidebar a:hover{
+  background-color: hsl(139, 20%, 42%);
+}
+#sidebar span:hover{
+    color: hsl(39, 85%, 55%);
+}
+#sidebar 
+.rotate svg:last-child{
+  rotate: 180deg;
+}
+
+#toggle-btn{
+  margin-left: auto;
+  padding: 1em;
+  border: none;
+  border-radius: .5em;
+  background: none;
+  cursor: pointer;
+
+  svg{
+    transition: rotate 150ms ease;
+  }
+}
+#toggle-btn svg:hover{
+  fill: #694c16;
+  transition: 200ms ease;
+}
+
+@media screen and (max-width: 1290px) {
+  #sidebar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    min-height: auto;
+    border-right: none;
+    overflow-y: hidden;
+    background-color: #3b5b44;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  #sidebar.close {
+      width: 100%;
+  }
+
+  #sidebar ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+      padding: 0 10px;
+  }
+
+  #sidebar > ul > li:first-child,
+  #toggle-btn,
+  #sidebar a span {
+      display: none;
+  }
+
+  #sidebar a {
+      padding: 10px;
+  }
+
+  #sidebar svg {
+      width: 24px;
+      height: 24px;
+  }
+}

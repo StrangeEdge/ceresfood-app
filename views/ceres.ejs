@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3eaddf1d51.js" crossorigin="anonymous"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');</style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="x-icon" href="images/favicon.png">
+    <script src="app.js"></script>
+    <script src="savedRecipes.js"></script>
+    <script src="ceres.js" defer></script>
+    <link rel="stylesheet" href="css/ceres.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <title>Ceres</title>
+</head>
+<body>
+    <nav id="sidebar" class="close">
+        <ul>
+            <li>
+                <img class="logo-image" src="images/Ceres Logo.png" width="40px">
+                <span class="logo">Ceres</span>
+                <button onclick=toggleSidebar() id="toggle-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg>
+                </button>
+            </li>
+            <li class="active">
+                <a href="/ceres">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z"/></svg>
+                <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/savedRecipes">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"><path d="M21 3h-7a2.98 2.98 0 0 0-2 .78A2.98 2.98 0 0 0 10 3H3a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h5.758c.526 0 1.042.214 1.414.586l1.121 1.121c.009.009.021.012.03.021.086.079.182.149.294.196h.002a.996.996 0 0 0 .762 0h.002c.112-.047.208-.117.294-.196.009-.009.021-.012.03-.021l1.121-1.121A2.015 2.015 0 0 1 15.242 20H21a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM8.758 18H4V5h6c.552 0 1 .449 1 1v12.689A4.032 4.032 0 0 0 8.758 18zM20 18h-4.758c-.799 0-1.584.246-2.242.689V6c0-.551.448-1 1-1h6v13z"></path></svg>
+                    <span>Recipes</span>
+                    </a>
+            </li>
+            <li>
+                <a href="/pantry">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M120-640h720v360q0 50-35 85t-85 35H240q-50 0-85-35t-35-85v-360Zm80 80v280q0 17 11.5 28.5T240-240h480q17 0 28.5-11.5T760-280v-280H200Zm-80-120v-80h240v-40q0-17 11.5-28.5T400-840h160q17 0 28.5 11.5T600-800v40h240v80H120Zm360 280Z"/></svg>
+                    <span>Pantry</span>
+                    </a>
+            </li>
+            <li>
+                <a href="/mealPlanner">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
+                    <span>Meal Planner</span>
+                    </a>
+            </li>
+    </nav>
+    <main>
+        <nav class="nav-bar">
+            <div class="user">
+                <div>
+                    <span class="userIcon"><svg xmlns="http://www.w3.org/2000/svg"viewBox="0 -960 960 960"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg></span>
+                </div>
+                <span class="username"><%= username %></span>
+            </div>
+            <div>
+                <div class="user-dropdown">
+                    <span class="username"><i class='bx bxs-cog'></i></span>
+                    <div class="dropdown-menu">
+                        <a href="/logout" class="logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <div class="search">
+                <h1>Welcome back <%= firstname %></h1>
+                <h1>Recipe Search</h1>
+                <form action="/search" method="POST">
+                    <div class="searchbar">
+                        <input type="text" class="searchbar__input" id="query" name="query" placeholder="Enter recipe, ingredient, etc.">
+                        <button type="submit" class="searchbar__button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg>
+                        </button>
+                    </div>        
+                    <div class="filter-dropdowns">
+                        <div class="dropdown">
+                            <button type="button" class="dropbtn">Cuisine</button>
+                            <div class="dropdown-content">
+                                <label><input type="checkbox" name="cuisine" value="american"> American</label>
+                                <label><input type="checkbox" name="cuisine" value="asian"> Asian</label>
+                                <label><input type="checkbox" name="cuisine" value="british"> British</label>
+                                <label><input type="checkbox" name="cuisine" value="caribbean"> Caribbean</label>
+                                <label><input type="checkbox" name="cuisine" value="chinese"> Chinese</label>
+                                <label><input type="checkbox" name="cuisine" value="french"> French</label>
+                                <label><input type="checkbox" name="cuisine" value="indian"> Indian</label>
+                                <label><input type="checkbox" name="cuisine" value="italian"> Italian</label>
+                                <label><input type="checkbox" name="cuisine" value="japanese"> Japanese</label>
+                                <label><input type="checkbox" name="cuisine" value="mediterranean"> Mediterranean</label>
+                                <label><input type="checkbox" name="cuisine" value="mexican"> Mexican</label>
+                                <label><input type="checkbox" name="cuisine" value="middle-eastern"> Middle Eastern</label>
+                            </div>
+                        </div>
+        
+                        <div class="dropdown">
+                            <button type="button" class="dropbtn">Health Labels</button>
+                            <div class="dropdown-content">
+                                <label><input type="checkbox" name="health" value="vegan"> Vegan</label>
+                                <label><input type="checkbox" name="health" value="vegetarian"> Vegetarian</label>
+                                <label><input type="checkbox" name="health" value="gluten-free"> Gluten-Free</label>
+                                <label><input type="checkbox" name="health" value="dairy-free"> Dairy-Free</label>
+                                <label><input type="checkbox" name="health" value="low-sugar"> Low Sugar</label>
+                                <label><input type="checkbox" name="health" value="keto-friendly"> Keto-Friendly</label>
+                                <label><input type="checkbox" name="health" value="paleo"> Paleo</label>
+                                <label><input type="checkbox" name="health" value="pescatarian"> Pescatarian</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="container1">
+                <div>
+                    <h1>Need some recipe ideas? ➡</h1>
+                </div>
+                <div class="recipe-categories">
+                    <a id="keto"><img src="images/low-carb.png"><br>Keto-Friendly</a><br>
+                    <a id="gluten-free"><img src="images/gluten-free.png"><br>Gluten-Free</a><br>
+                    <a id="paleo"><img src="images/paleo-meal.png"><br>Paleo</a><br>
+                    <a id="pescatarian"><img src="images/pescatarian.png"><br>Pescatarian</a><br>
+                    <a id="dairy-free"><img src="images/dairy-free.png"><br>Dairy-Free</a><br>
+                    <a id="low-sugar"><img src="images/low-sugar.png"><br>Low-Sugar</a><br>
+                </div>
+            </div>
+            
+        
+            <div class="container2">
+                <h1>Featured Recipes ➡</h1>
+                <div class="featured-recipes">       
+                    <% recipes.forEach(recipe => { %>
+                        <a href="/results/recipe/?recipe=<%= recipe.recipeId %>" data-recipe-id="<%= recipe.recipeId %>">
+                            <img src="<%= recipe.recipeImage %>" 
+                                 alt="<%= recipe.recipeLabel %>">
+                            <h2><%= recipe.recipeLabel %></h2>
+                        </a>
+                    <% }); %>
+                </div
+            </div>
+        
+            <div class="container4">
+                <div>
+                    <h1>Your favorite Recipes ➡</h1>
+                </div>
+                <div class="favorite-recipes">
+                    <% favoriteRecipes.slice(0,4).forEach(recipe => { %>
+                        <li class="recipe-item">
+                            <a href="/results/recipe/?recipe=<%=recipe.recipeId%>">
+                                <div class="recipe-image">
+                                    <img src="<%= recipe.recipeImage %>" alt="<%= recipe.recipeLabel %>">
+                                </div>
+                                <div class="recipe-text">
+                                    <div class="recipe-title">
+                                        <h2 class="recipe-label"><%= recipe.recipeLabel %></h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                    <li class="recipe-item">
+                        <a href="/savedRecipes">
+                            <div class="recipe-image">
+                                <img src="images/view-more-card.png" alt="View More">
+                            </div>
+                            <div class="recipe-text">
+                                <div class="recipe-title">
+                                    <h2 class="recipe-label">View More</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </div>
+    </main>
+</body>
+</html>

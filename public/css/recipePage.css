@@ -1,0 +1,79 @@
+body {
+    font-family: Bitter;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    line-height: 1.6;
+    background-image: linear-gradient(#fff8ea, #fcf5e7, #f7f0e2);
+}
+img {
+    display: block;
+    height: auto;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+h1{
+    text-align: center;
+}
+
+.home-button{
+    display: inline-block; 
+    margin-top: 20px; 
+    padding: 10px; 
+    background-color: hsl(0, 0%, 96%); 
+    text-decoration: none; 
+    border-radius: 5px;
+    color: #d7a342;
+    transition: 0.3s ease;
+}
+
+.home-button:hover{
+    background-color: #d7a342; 
+    color: #ffffff;
+}
+
+.recipe-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.diet-info{
+    display: flex;
+    justify-content: space-between;
+}
+.nutrition {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.labels,
+.labels-caution{
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 5px; 
+    margin: 5px; 
+    border-radius: 5px;
+}
+.labels-caution{
+    background-color: hsl(7, 100%, 62%);
+}
+
+.fav-button.favorited svg {
+    fill: #d6a240;
+}
+
+.fav-button svg {
+    fill: #ccc;
+    transition: fill 0.3s ease;
+    cursor: pointer;
+}
+
+.fav-button :hover{
+    transform: scale(1.1);
+    transition: ease 0.3s;
+}

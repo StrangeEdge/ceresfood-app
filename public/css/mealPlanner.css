@@ -1,0 +1,286 @@
+:root{
+    --clr-primary: #d6a240;
+    --clr-body: #333;
+    --base-clr: #11121a;
+    --line-clr: #42434a;
+    --hover-clr: #222533;
+    --text-clr: #e6e6ef;
+    --accent-clr: #5e63ff;
+    --secondary-text-clr: #b0b3c1;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body{
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+        "navbar navbar"
+        "sidebar main";
+    background-image: linear-gradient(#fff8ea, white, white);
+    font-family: Bitter, serif;
+}
+
+main {
+  grid-area: main;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+main p {
+  color: var(--secondary-text-clr);
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+  
+.meal-planner {
+    padding: 20px;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar {
+    display: grid;
+    gap: 1px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+    background: white;
+    min-height: 120px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.calendar-day:hover {
+    background: #f0f0f0;
+}
+
+.calendar-day.empty {
+    background: #f9f9f9;
+    cursor: default;
+}
+
+.day-number {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.day-meals {
+    font-size: 0.9em;
+}
+
+.meal-selector {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.meal-selector h3 {
+    margin-bottom: 15px;
+    color: var(--clr-primary);
+}
+
+#mealType {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.recipe-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.recipe-card.selected {
+    border-color: var(--clr-primary);
+    background-color: #fff8ea;
+    transform: scale(1.02);
+}
+
+.recipe-card:hover {
+    border-color: var(--clr-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.recipe-card h5 {
+    margin: 0;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.button {
+    font-family: Bitter;
+    display: inline-block;
+    padding: 10px 22px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--clr-primary);
+    color: white;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: hsl(39, 65%, 40%);
+}
+
+
+.meal {
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin: 2px 0;
+    font-size: 0.8em;
+}
+
+.breakfast { background-color: #ffe0b2; }
+.lunch { background-color: #c8e6c9; }
+.dinner { background-color: #ffcdd2; }
+.snack { background-color: #e1bee7; }
+
+.existing-meals {
+    margin: 15px 0;
+}
+
+.existing-meal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+
+.meal-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.meal-type {
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.meal-calories {
+    color: #666;
+}
+
+.delete-meal {
+    background: none;
+    border: none;
+    color: #ff4444;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.delete-meal:hover {
+    color: #cc0000;
+}
+
+.daily-calories {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.calories{
+    text-align: center;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+    z-index: 1000;
+    font-family: Bitter, serif;
+}
+
+.toast.success {
+    border-left: 4px solid var(--clr-primary);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

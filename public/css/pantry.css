@@ -1,0 +1,244 @@
+:root{
+    --clr-primary: #d6a240;
+    --clr-body: #333;
+    --base-clr: #11121a;
+    --line-clr: #42434a;
+    --hover-clr: #222533;
+    --text-clr: #e6e6ef;
+    --accent-clr: #d6a240;
+    --secondary-text-clr: #b0b3c1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+        "navbar navbar"
+        "sidebar main";
+    background-image: linear-gradient(#fff8ea, white, white);
+    font-family: Bitter;
+}
+
+main {
+    grid-area: main;
+    padding: 20px;
+    overflow-y: auto;
+}
+main p{
+  color: var(--secondary-text-clr);
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.pantry-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.add-ingredient-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quantity-section {
+  display: flex;
+  gap: 5px;
+}
+
+.ingredient-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ingredient-info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.ingredient-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: var(--clr-primary);
+  color: white;
+}
+
+.delete-btn {
+  background: #ff4444;
+  color: white;
+}
+
+.quantity-display {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.add-btn {
+  padding: 8px 16px;
+  background: var(--clr-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  background: white;
+  border-left: 4px solid #ff4444;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+  z-index: 1000;
+  font-family: Bitter, serif;
+}
+
+.toast.error {
+  border-left-color: #ff4444;
+}
+
+.toast.success {
+  border-left-color: #4CAF50;
+}
+
+.toast-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.toast.error .toast-icon {
+  color: #ff4444;
+}
+
+.toast.success .toast-icon {
+  color: #4CAF50;
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+@media (max-width: 1290px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "navbar"
+        "main";
+  }
+
+  .add-ingredient-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ingredient-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ingredient-info {
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .ingredient-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+
+  .edit-btn, .delete-btn, .add-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .quantity-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toast {
+    width: 90%;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .pantry-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+  }
+}
