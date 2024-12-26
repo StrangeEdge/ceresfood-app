@@ -26,6 +26,11 @@ body {
     font-family: Bitter;
 }
 
+@font-face {
+    font-family: Trends;
+    src: url(Trends.ttf);
+}
+
 .nav-bar {
     grid-area: navbar;
     display: flex;

@@ -2,7 +2,7 @@ function showToastNotification(success, message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.innerHTML = `
-        <div class="checkmark">${success ? '😁' : '❌'}</div>
+        <div class="checkmark">${success ? '🍳' : '❌'}</div>
         <div class="toast-message">${message}</div>
     `;
     document.body.appendChild(toast);

@@ -7,6 +7,7 @@
     <script src="mealPlanner.js"></script>
     <script src="app.js"></script>
     <script src="savedRecipes.js"></script>
+    <script src="imageRefresh.js"></script>
     <link rel="stylesheet" href="css/mealPlanner.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="icon" type="x-icon" href="images/favicon.png">
@@ -49,9 +50,7 @@
     <main>
         <div class="meal-planner">
             <div class="calendar-controls">
-                <button class="button" onclick="previousMonth()">Previous</button>
-                <h2 id="currentMonth" style="text-align: center;"></h2>
-                <button class="button" onclick="nextMonth()">Next</button>
+                <h2 id="currentMonth"></h2>
             </div>
         
             <div class="calendar" id="calendar">
@@ -84,7 +83,7 @@
                                 data-recipe-label="<%= recipe.recipeLabel %>"
                                 data-recipe-image="<%= recipe.recipeImage %>"
                                 data-recipe-calories="<%= recipe.recipeCalories %>">
-                                <div data-recipe-id="<%= recipe.recipeId %>">
+                                <div class="recipe-card-image" data-recipe-id="<%= recipe.recipeId %>">
                                     <img
                                         src="<%= recipe.recipeImage %>" 
                                         alt="<%= recipe.recipeLabel %>"

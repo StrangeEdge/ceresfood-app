@@ -1,18 +1,56 @@
 let currentDate = new Date();
 
+function isToday(date) {
+    const today = new Date();
+    return date.getDate() === today.getDate() &&
+           date.getMonth() === today.getMonth() &&
+           date.getFullYear() === today.getFullYear();
+}
+
+function getWeekNumber(date) {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+    let weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+    
+    if (weekNumber === 53){
+        weekNumber = 1;
+    }
+    return weekNumber;
+}
+
+function getWeekDates(date) {
+    const start = new Date(date);
+    start.setDate(start.getDate() - start.getDay());
+    
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+        const day = new Date(start);
+        day.setDate(start.getDate() + i);
+        dates.push(day);
+    }
+    return dates;
+}
+
 function renderCalendar() {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
+    const weekDates = getWeekDates(currentDate);
+    const startDate = weekDates[0];
+    const endDate = weekDates[6];
+    const weekNumber = getWeekNumber(startDate);
     
     document.getElementById('currentMonth').textContent = 
-        new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+        `${startDate.toLocaleDateString('default', { month: 'long', day: 'numeric' })} - ${
+            endDate.toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' })
+        } (Week ${weekNumber})`;
     
     const calendar = document.getElementById('calendar');
     if (!calendar) return;
     
     calendar.innerHTML = `
+        <div class="calendar-controls">
+            <button class="button" onclick="previousWeek()">Previous Week</button>
+            <button class="button current-week" onclick="jumpToCurrentWeek()">Current Week</button>
+            <button class="button" onclick="nextWeek()">Next Week</button>
+        </div>
         <div class="calendar-header">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
             <div>Thu</div><div>Fri</div><div>Sat</div>
@@ -22,68 +60,46 @@ function renderCalendar() {
 
     const daysContainer = calendar.querySelector('.calendar-days');
     let days = '';
-    
-    for (let i = 0; i < firstDay.getDay(); i++) {
-        days += '<div class="calendar-day empty"></div>';
-    }
 
-    for (let day = 1; day <= lastDay.getDate(); day++) {
+    weekDates.forEach(date => {
+        const isCurrentDay = isToday(date);
         days += `
-            <div class="calendar-day" onclick="selectDate('${year}-${month + 1}-${day}')">
-                <div class="day-number">${day}</div>
-                <div class="day-meals" id="meals-${year}-${month + 1}-${day}"></div>
+            <div class="calendar-day ${isCurrentDay ? 'today' : ''}" 
+                 onclick="selectDate('${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}')">
+                <div class="day-number ${isCurrentDay ? 'today-number' : ''}">${date.getDate()}</div>
+                <div class="day-meals" id="meals-${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}"></div>
             </div>
         `;
-    }
+    });
 
     daysContainer.innerHTML = days;
-    loadMealPlans(year, month + 1);
+    
+    loadMealPlans(startDate.getFullYear(), startDate.getMonth() + 1);
 }
 
-function previousMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
+function previousWeek() {
+    currentDate.setDate(currentDate.getDate() - 7);
     renderCalendar();
 }
 
-function nextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
+function nextWeek() {
+    currentDate.setDate(currentDate.getDate() + 7);
     renderCalendar();
 }
 
-async function loadMealPlans(year, month) {
-    try {
-        console.log(`Loading meal plans for ${year}-${month}`);
-        const response = await fetch(`/meal-planner/${year}/${month}`);
-        const data = await response.json();
-        console.log('Received meal plans:', data);
-        
-        if (data.success && data.mealPlans) {
-            data.mealPlans.forEach(plan => {
-                const date = new Date(plan.date);
-                const dayElement = document.getElementById(
-                    `meals-${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-                );
-                
-                if (dayElement) {
-                    const mealsList = plan.meals.map(meal => 
-                        `<div class="meal ${meal.mealType}">${meal.recipeLabel}</div>`
-                    ).join('');
-                    dayElement.innerHTML = mealsList;
-                }
-            });
-        } else {
-            console.error('Failed to load meal plans:', data.error);
-        }
-    } catch (error) {
-        console.error('Error loading meal plans:', error);
-    }
+function jumpToCurrentWeek() {
+    currentDate = new Date();
+    renderCalendar();
 }
 
 async function selectDate(date) {
     const dateObj = new Date(date);
     document.getElementById('selectedDate').textContent = dateObj.toLocaleDateString();
-    document.getElementById('mealSelector').style.display = 'block';
-    document.getElementById('mealSelector').dataset.selectedDate = date;
+
+    const mealSelector = document.getElementById('mealSelector');
+    mealSelector.style.display = 'block';
+    mealSelector.dataset.selectedDate = date;
+    mealSelector.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
     try {
         const response = await fetch(`/meal-planner/${dateObj.getFullYear()}/${dateObj.getMonth() + 1}`);
@@ -129,6 +145,39 @@ function selectRecipe(recipeCard) {
     recipeCard.classList.add('selected');
 }
 
+async function loadMealPlans(year, month) {
+    try {
+        console.log(`Loading meal plans for ${year}-${month}`);
+        const response = await fetch(`/meal-planner/${year}/${month}`);
+        const data = await response.json();
+        console.log('Received meal plans:', data);
+        
+        if (data.success && data.mealPlans) {
+            data.mealPlans.forEach(plan => {
+                const date = new Date(plan.date);
+                const dayElement = document.getElementById(
+                    `meals-${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+                );
+                
+                if (dayElement) {
+                    const mealsList = plan.meals.map(meal => 
+                        `<div class="meal ${meal.mealType}">${meal.recipeLabel}</div>`
+                    ).join('');
+                    dayElement.innerHTML = mealsList;
+                }
+            });
+        } else {
+            throw new Error(data.error || 'Failed to load meal plans!');
+        }
+    } catch (error) {
+        const toast = document.createElement('div');
+        toast.className = 'toast error';
+        toast.textContent = `Error loading meal plans: ${error.message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+}
+
 async function addMeal() {
     const date = document.getElementById('mealSelector').dataset.selectedDate;
     const mealType = document.getElementById('mealType').value;
@@ -167,11 +216,14 @@ async function addMeal() {
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         } else {
-            alert('Failed to add meal: ' + data.error);
+            throw new Error(data.error || 'Failed to add meal!');
         }
     } catch (error) {
-        console.error('Error adding meal:', error);
-        alert('Failed to add meal');
+        const toast = document.createElement('div');
+        toast.className = 'toast error';
+        toast.textContent = `Error adding meal: ${error.message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 }
 
@@ -203,11 +255,14 @@ async function deleteMeal(date, mealType) {
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         } else {
-            alert('Failed to delete meal: ' + data.error);
+            throw new Error(data.error || 'Failed to delete meal!');
         }
     } catch (error) {
-        console.error('Error deleting meal:', error);
-        alert('Failed to delete meal');
+        const toast = document.createElement('div');
+        toast.className = 'toast error';
+        toast.textContent = `Error deleting meal: ${error.message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 }
 

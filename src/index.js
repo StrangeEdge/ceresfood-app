@@ -107,9 +107,9 @@ app.get("/ceres", requireLogin, async (req,res)=>{
             recipeLabel: 'Chicken Adobo'
         },
         {
-            recipeId: 'recipe_c0c760e4280d0d7b50535686ed0bd8fe',
+            recipeId: 'recipe_16f8dfb2ef5d7b35e60230a4a6b12f5c',
             recipeImage: '',
-            recipeLabel: 'Mongolian Beef'
+            recipeLabel: 'Beef Caldereta'
         },
         {
             recipeId: 'recipe_c2f8f23ace72432980aa9fbfda38bbd1',
@@ -128,7 +128,6 @@ app.get("/ceres", requireLogin, async (req,res)=>{
         }
     ];
     
-
     res.render("ceres",{username:req.session.username,firstname, favoriteRecipes,recipes: featuredRecipes});
 })
 
@@ -167,5 +166,5 @@ app.get('/logout', (req, res) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, '0.0.0.0', () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Server running`);
 });

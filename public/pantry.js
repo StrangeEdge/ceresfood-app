@@ -37,19 +37,40 @@ function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     
-    const icon = type === 'error' ? '⚠️' : '✓';
-    
-    toast.innerHTML = `
+    const icon = type === 'error' ? '⚠️' : '';
+
+    let content = `
         <span class="toast-icon">${icon}</span>
         <span class="toast-message">${message}</span>
     `;
 
+    if (type === 'confirm') {
+        content += `
+            <div class="toast-actions">
+                <button class="button confirm-yes">Yes</button>
+                <button class="button confirm-no">No</button>
+            </div>
+        `;
+    }
+    
+    toast.innerHTML = content;
     document.body.appendChild(toast);
 
-    setTimeout(() => {
-        toast.style.animation = 'fadeOut 0.3s ease forwards';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    if (type === 'confirm') {
+        toast.querySelector('.confirm-yes').addEventListener('click', () => {
+            toast.remove();
+            if (onConfirm) onConfirm();
+        });
+        toast.querySelector('.confirm-no').addEventListener('click', () => {
+            toast.remove();
+            if (onCancel) onCancel();
+        });
+    } else {
+        setTimeout(() => {
+            toast.style.animation = 'fadeOut 0.3s ease forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
 }
 
 
@@ -100,19 +121,14 @@ async function saveIngredient(card) {
         if (response.ok) {
             location.reload();
         } else {
-            alert('Failed to update ingredient');
+            showToast(data.error, 'Failed to update ingredient!');
         }
     } catch (error) {
-        console.error('Error:', error);
-        alert('Failed to update ingredient');
+        showToast('Failed to update ingredient','error');
     }
 }
 
 async function deleteIngredient(button) {
-    if (!confirm('Are you sure you want to delete this ingredient?')) {
-        return;
-    }
-
     const card = button.closest('.ingredient-card');
     const id = card.dataset.id;
 
@@ -122,12 +138,16 @@ async function deleteIngredient(button) {
         });
 
         if (response.ok) {
+            showToast('Ingredient deleted!')
             card.remove();
         } else {
-            alert('Failed to delete ingredient');
+            throw new Error(data.error||'Failed to delete ingredient');
         }
     } catch (error) {
-        console.error('Error:', error);
-        alert('Failed to delete ingredient');
+        const toast = document.createElement('div');
+        toast.className = 'toast error';
+        toast.textContent = `Failed to delete ingredient: ${error.message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 }

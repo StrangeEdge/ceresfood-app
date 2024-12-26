@@ -17,6 +17,11 @@ body{
     overflow-x: hidden;
 }
 
+@font-face {
+    font-family: Trends;
+    src: url(Trends.ttf);
+}
+
 .header {
     display: flex;
     flex-direction: column;
@@ -517,7 +522,7 @@ body{
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .header {
         padding: 10px;
         width: 100%;
@@ -599,7 +604,7 @@ body{
     .container2-image img,
     .container3-image img,
     .container4-image img {
-        width: 100%;
+        width: 80%;
     }
 
     .container5 {

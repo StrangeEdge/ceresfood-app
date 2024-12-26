@@ -151,7 +151,7 @@ select {
 }
 
 .toast.success {
-  border-left-color: #4CAF50;
+  border-left-color: var(--clr-primary);
 }
 
 .toast-icon {
@@ -164,7 +164,7 @@ select {
 }
 
 .toast.success .toast-icon {
-  color: #4CAF50;
+  color: var(--clr-primary);
 }
 
 @keyframes slideIn {
@@ -231,6 +231,7 @@ select {
     width: 90%;
     bottom: 10px;
     right: 10px;
+    margin-bottom: 50px;
   }
 
   .pantry-container {
@@ -244,5 +245,9 @@ select {
 
   input[type="text"], input[type="number"], select {
     width: 100%;
+  }
+  
+  .toast.success{
+    margin-bottom: 80px;
   }
 }

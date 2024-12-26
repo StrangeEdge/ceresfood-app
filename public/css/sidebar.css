@@ -28,6 +28,11 @@
   padding: 5px;
   width: 60px;
 }
+
+#sidebar.close a span{
+  display: none;
+}
+
 #sidebar ul{
   list-style: none;
 }

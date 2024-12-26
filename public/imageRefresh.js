@@ -6,6 +6,28 @@ const imageUtils = {
         }
     },
 
+    preloadFeaturedImages: function() {
+        const featuredImages = document.querySelectorAll('.featured-recipes a');
+        featuredImages.forEach(link => {
+            const recipeId = link.dataset.recipeId;
+            const img = link.querySelector('img');
+            
+            if (recipeId && img) {
+                if (!this.loadFromCache(img, recipeId)) {
+                    fetch(`/recipe/refresh/${recipeId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success && data.imageUrl) {
+                                img.src = data.imageUrl;
+                                localStorage.setItem(`recipe-image-${recipeId}`, data.imageUrl);
+                            }
+                        })
+                        .catch(error => console.error('Error preloading image:', error));
+                }
+            }
+        });
+    },
+
     handleImageError: function(img, recipeId) {
         if (!img.dataset.refreshAttempted) {
             img.dataset.refreshAttempted = 'true';
@@ -28,6 +50,8 @@ const imageUtils = {
     },
 
     loadImage: function() {
+        this.preloadFeaturedImages();
+        
         const featuredImages = document.querySelectorAll('.featured-recipes img');
         featuredImages.forEach(img => {
             const recipeId = img.closest('a').dataset.recipeId;
@@ -44,6 +68,16 @@ const imageUtils = {
                 img.onerror = () => this.handleImageError(img, recipeId);
             }
         });
+        
+        const savedRecipeImages = document.querySelectorAll('.meal-selector .recipe-card-image img');
+        savedRecipeImages.forEach(img =>{
+            const recipeCard = img.closest('.recipe-card');
+            if (recipeCard) {
+                const recipeId = recipeCard.dataset.recipeId;
+                this.loadFromCache(img, recipeId);
+                img.onerror = () => this.handleImageError(img, recipeId);
+            }
+        })
     }
 };
 
