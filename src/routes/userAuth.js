@@ -49,7 +49,7 @@ router.post("/login", loginLimiter, async(req,res)=>{
 
 router.post("/signup", async(req,res)=>{
     try {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!$%^&*()_+={}\[\]:;"'<>,.?/\\|`~\-]{8,}$/;
         if (!passwordRegex.test(req.body.password)) {
             return res.status(400).json({
                 error: 'Password must be at least 8 characters long and contain uppercase, lowercase, and a number.',
